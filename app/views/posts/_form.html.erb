@@ -1,0 +1,61 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+  </div>
+  </br>
+    <%= f.label "Genre", :class=>"control-label input-group" %>
+  <div class="container">  
+	<div class="btn-group" data-toggle="buttons">
+		<label class=" btn-default">
+			<%= f.radio_button :genre,'Classic', checked: true%>Classic
+		</label>
+		<label class=" btn-default">
+			<%= f.radio_button :genre,'Musical', checked: true %>Musical
+		</label>
+		<label class=" btn-default">
+			<%= f.radio_button :genre,'Hip Hop',checked: true %>Hip Hop
+		</label>
+		<label class=" btn-default">
+			<%= f.radio_button :genre,'Dance',checked: true %>Dance
+		</label>
+		<label class=" btn-default">
+			<%= f.radio_button :genre,'Acoustic',checked: true %>Acoustic
+		</label>
+		<label class=" btn-default">
+			<%= f.radio_button :genre,'Rock',checked: true %>Rock
+		</label>
+		<label class=" btn-default">
+			<%= f.radio_button :genre,'Etc',checked: true %>etc
+		</label>
+	</div>
+	</div>
+	</br></br>
+	
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

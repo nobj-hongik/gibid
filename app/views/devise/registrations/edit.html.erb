@@ -1,0 +1,62 @@
+
+<header id="fh5co-header-section" role="header" class="" >
+			<div class="container">
+
+
+
+				<!-- <div id="fh5co-menu-logo"> -->
+					<!-- START #fh5co-logo -->
+					<h1 id="fh5co-logo" class="pull-left"><a href="/"><%= image_tag "logo.png" %></a></h1>
+
+					<!-- START #fh5co-menu-wrap -->
+					<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+							<li class="active"><a href="/home/about">About Us</a></li>
+							<li><a href="/concerts">경매</a></li>
+							<li><a href="/posts">홍보게시판</a></li>
+							<% if user_signed_in? %>
+							<li><a href="/users/sign_out">로그아웃</a></li>
+							<li><a href="/users/edit">정보수정</a></li>
+							<% else %>
+							<li class="active"><a href="/users/sign_in">로그인</a></li>
+							<li><a href="/users/sign_up">회원가입</a></li>
+							<% end%>
+						</ul>
+					</nav>
+				<!-- </div> -->
+
+			</div>
+		</header>
+
+
+ 
+		<div id="fh5co-hero">
+			<!-- End fh5co-arrow -->
+
+		</div>
+<div class="container">
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %></br>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
+
+    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %></br>
+    <%= f.input :password_confirmation, required: false %></br>
+    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %></br>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "수정하기", :class=>"btn btn-outline btn-md" %>
+  </div>
+  
+  
+<% end %>
+
+</div>

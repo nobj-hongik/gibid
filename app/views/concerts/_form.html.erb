@@ -1,0 +1,42 @@
+<%= form_for(@concert) do |f| %>
+  <% if @concert.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@concert.errors.count, "error") %> prohibited this concert from being saved:</h2>
+
+      <ul>
+      <% @concert.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :performDate %><br>
+    <%= f.datetime_select :performDate %>
+  </div>
+  <div class="field">
+    <%= f.label :dueTime %><br>
+    <%= f.datetime_select :dueTime %>
+  </div>
+  <div class="field">
+    <%= f.label :ticketNumber %><br>
+    <%= f.number_field :ticketNumber %>
+  </div>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

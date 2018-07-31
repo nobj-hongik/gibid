@@ -1,0 +1,79 @@
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+</head>
+
+  <ul id="dropdown1" class="dropdown-content">
+	<li><a href="/posts" style="color:black; text-align:right">All</a></li>
+	<li><a href="/acoustic/index" style="color:black; text-align:right">Acoustic</a></li>
+	<li><a href="/dance/index" style="color:black; text-align:right">Dance</a></li>
+	<li><a href="/hipHop/index" style="color:black; text-align:right">Hip Hop</a></li>
+	<li><a href="/classic/index" style="color:black; text-align:right">Classic</a></li>
+	<li><a href="/musical/index" style="color:black; text-align:right">Musical</a></li>
+	<li><a href="/rock/index" style="color:black; text-align:right">Rock</a></li>
+	<li><a href="/ect/index" style="color:black; text-align:right">Ect</a></li>
+  </ul>
+  
+<header id="fh5co-header-section" role="header" class="" >
+	<div class="container">
+		<!-- <div id="fh5co-menu-logo"> -->
+		<!-- START #fh5co-logo -->
+		<h1 id="fh5co-logo" class="pull-left"><a href="/"><%= image_tag "logo.png" %></a></h1>
+
+		<!-- START #fh5co-menu-wrap -->
+		<nav id="fh5co-menu-wrap" role="navigation">
+			<ul class="sf-menu" id="fh5co-primary-menu">
+				<li><a href="/home/about">About Us</a></li>
+				<li><a href="/concerts">경매</a></li>
+				<li class="active"><a href="/posts">홍보게시판</a></li>
+				<% if user_signed_in? %>
+				<li><a href="/users/sign_out">로그아웃</a></li>
+				<li><a href="/users/edit">정보수정</a></li>
+				<% else %>
+				<li><a href="/users/sign_in">로그인</a></li>
+				<li class="fh5co-special"><a href="/users/sign_up">회원가입</a></li>
+				<% end%>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdown1">장르선택</a></li>	
+			</ul>
+		</nav>
+		<!-- </div> -->
+	</div>
+</header>
+
+ 
+<div id="fh5co-hero">
+	<!-- End fh5co-arrow -->
+</div>
+<div class="container"; style="text-align:center";>				
+	<strong><p style="font-size:35px";>공연 홍보 게시판<p></strong>
+	</br></br></br>
+	<div>
+    	<p><a href="/posts/new" class="btn btn-outline btn-md">홍보하기</a></p>
+	</div>
+</div>
+</br></br></br></br></br></br>
+
+<div>
+	<div>
+		<div class="cards">
+			<% @posts.each do |post| %>
+		        <div class="col-12 col-md-3">
+		            <div class="card-img__container d-flex justify-content-center align-items-center" style="height:500px; overflow:hidden">
+						<a href="/posts/<%=post.id%>"><img class="card-img-top height-fix" style="width:100%; height:auto;" src="<%= post.image %>"/></a>
+		            </div>
+		            <div class="card-block text-center">
+		              <h4 class="card-title mb-2"><%= post.title %></h4>
+		              <% if user_signed_in? %>
+			              <% if current_user.id == post.user.id %>
+				              <a href="/posts/<%=post.id%>" data-method="delete" class="btn btn-outline btn-md">삭제하기</a>
+				              <a href="/posts/<%=post.id%>/edit" data-method="get" class="btn btn-outline btn-md">수정하기</a>
+			              <% end %>
+			          <% end %>
+		            </div>
+		        </div>
+		    <% end %>
+		</div> 
+	</div>
+</div>

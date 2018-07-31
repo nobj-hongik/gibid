@@ -1,0 +1,38 @@
+// Place all the styles related to the Concerts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, div, h1, form, fieldset, input, textarea {
+	margin: 0; padding: 0; border: 0; outline: none;
+}
+html {
+	height: 150%;
+}
+body {
+	font-family: 'Noto Sans', sans-serif;
+}
+.cover{
+	background:#CCC; width:700px; margin:auto; padding-left:60px;
+}
+h2.contact { padding-left: 125px; font-size: 40px; color: #ff5400; height: 105px; background: url(images/contact.png) no-repeat -10px -10px;  font-family: 'Noto Sans';}
+p.contact { font-size: 24px; margin-bottom: 15px; line-height: 36px; font-family: 'Noto Sans'; color: #4b4b4b; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); }
+#contact { margin-bottom: 0px; }
+input[type="text"] { width: 400px; }
+textarea { width: 600px; height: 275px; }

@@ -1,0 +1,77 @@
+<head>
+	<meta charset="utf-8">
+	<link href="/gibid/app/assets/stylesheets/devisestyle.scss" rel='stylesheet' type='text/css' />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!--webfonts-->
+	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700|Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<!--//webfonts-->
+	<script>
+	    function myFunction()
+	        {
+	            alert("Thanks for login");
+	        }
+	</script>
+</head>
+
+<body>
+	<header id="fh5co-header-section" role="header" class="" >
+	    <div class="container">
+	        <!-- <div id="fh5co-menu-logo"> -->
+	            <!-- START #fh5co-logo -->
+	            <h1 id="fh5co-logo" class="pull-left"><a href="/"><%= image_tag "/images/logo.png" %></a></h1>
+	
+	            <!-- START #fh5co-menu-wrap -->
+	            <nav id="fh5co-menu-wrap" role="navigation">
+	                <ul class="sf-menu" id="fh5co-primary-menu">
+	                    <li><a href="/home/about">About Us</a></li>
+	                    <li><a href="/concerts">경매</a></li>
+	                    <li><a href="/posts">홍보게시판</a></li>
+	                    <% if user_signed_in? %>
+	                        <li><a href="/users/sign_out">로그아웃</a></li>
+	                        <li><a href="/users/edit">정보수정</a></li>
+	                    <% else %>
+	                        <li class="active"><a href="/users/sign_in">로그인</a></li>
+	                        <li class="fh5co-special"><a href="/users/sign_up">회원가입</a></li>
+	                    <% end %>
+	                </ul>
+	            </nav>
+	        <!-- </div> -->
+	    </div>
+	</header>
+	
+	<div id="fh5co-hero">
+	    <!-- End fh5co-arrow -->
+	</div>
+	
+	<div class="login" style="margin-top:-180px;">
+		<div class="inset">	
+			<div class="container">
+				<h2>Log in</h2>
+				<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			  <div class="field">
+			    <%= f.label :email %><br/>
+			    <%= f.email_field :email, autofocus: true %>
+			  </div>
+			
+			  <div class="field" >
+			    <%= f.label :password %><br />
+			    <%= f.password_field :password, autocomplete: "off" %>
+			  </div>
+			
+			  <% if devise_mapping.rememberable? -%>
+			    <div class="field">
+			      <%= f.check_box :remember_me %>
+			      <%= f.label :remember_me %>
+			    </div>
+			  <% end -%>
+			
+			  <div class="submit">
+			    <div class="actions" >
+			      <%= f.submit "Log in" %>
+			    </div>
+				</div>
+				<% end %>
+			</div>
+		</div>
+</body>

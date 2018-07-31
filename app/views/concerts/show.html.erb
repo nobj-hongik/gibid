@@ -1,0 +1,125 @@
+<body>
+  <header id="fh5co-header-section" role="header" class="" >
+  	<div class="container">
+  
+  		<!-- <div id="fh5co-menu-logo"> -->
+  			<!-- START #fh5co-logo -->
+  			<h1 id="fh5co-logo" class="pull-left"><a href="/"><%= image_tag "logo.png" %></a></h1>
+  
+  			<!-- START #fh5co-menu-wrap -->
+  			<nav id="fh5co-menu-wrap" role="navigation">
+  				<ul class="sf-menu" id="fh5co-primary-menu">
+  					<li><a href="/home/about">About Us</a></li>
+  					<li class="active"><a href="/concerts">경매</a></li>
+  					<li><a href="/posts">홍보게시판</a></li>
+  					<% if user_signed_in? %>
+  						<li><a href="/users/sign_out">로그아웃</a></li>
+  						<li><a href="/users/edit">정보수정</a></li>
+  					<% else %>
+  						<li><a href="/users/sign_in">로그인</a></li>
+  						<li><a href="/users/sign_up">회원가입</a></li>
+  					<% end%>
+  				</ul>
+  			</nav>
+  		<!-- </div> -->
+  
+  	</div>
+  </header>
+  
+  
+  <div id="fh5co-hero">
+  	<!-- End fh5co-arrow -->
+  	<div class="container" style="text-align: center;">
+  		<div class="col-md-8 ">
+  			<div class="fh5co-hero-wrap">
+        
+        <p id="notice"><%= notice %></p>
+        
+        <div class="container">
+          <p>
+            <%= image_tag("#{@concert.image}") %>
+          </p>
+        </div>
+        
+        <div class="container ">
+          <h1 class="btn btn-primary btn-lg">
+            <%= @concert.title %>
+          </h1>
+        </div>
+        <div class="container ">  
+          <h1 style=" color:#1490a4;">
+            <%= @concert.content %>
+          </h1>
+        </div>
+          <div class="container">
+          <h2>
+            <strong>공연 일시:</strong>
+            <%= @concert.performDate.strftime("%Y년 %m월 %d일 %H시 %M분") %>
+          </h2>
+        </div>
+        
+        <div class="fh5co-spacer fh5co-spacer-lg">
+          <div class="owl-dots">
+            <div class="owl-dot"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+            <div class="owl-dot"><span></span>
+            </div><div class="owl-dot"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+          </div>
+        </div>
+        
+        <div class="container">
+          <h2>
+            <strong>경매 마감 시간:</strong>
+            <%= @concert.dueTime.strftime("%Y년 %m월 %d일 %H시 %M분") %>
+          </h2>
+          
+          <h2>
+            <%= @concert.ticketNumber %>장의 티켓이 있습니다!
+          </h2>
+        </div>
+  
+        
+  
+  
+        
+        
+        
+  
+      <% current_time = Time.now + 60 * 60 * 9 %>
+      <% current_time %>
+      <% if @concert.dueTime > current_time %>
+      <!-- 아직 경매 진행 중일 때 -->
+      <hr>
+      <h3><strong>현재 <%=@concert.bids.count %>명이 경매에 참여하고 있습니다. 당신도 동참하세요! </strong></h3>
+      <!-- 현재 concert가 갖고 있는 bids 중 가장 높은 cost -->
+      <h4>현재 최고 금액: <%= @concert.bids.maximum("cost") %></h4>
+       <div class="well">
+        <form action="/concerts/<%=@concert.id%>" method="post">
+         <div class="form-group">
+          <p style="color:black"> 금액은 500원 단위로 입력 해주세요!</p>
+          <input type="hidden" value="<%=current_user.id%>" name="user_id"></input>
+          <input type="hidden" value="<%=@concert.id%>" name="concert_id"></input>
+          <input type="number" class="form-control" rows="5" name="cost"></input>
+         </div>
+         <button type="submit" class="btn btn-default" style="color:black">경매에 참여할래요!</button>
+        </form>
+       </div>
+      <% else %>
+      <!-- 경매가 완료 되었을 때 -->
+      <h2>"이미 경매가 종료 된 공연입니다."</h2>
+      <!-- 현재 concert가 갖고 있는 bids 중 cost가 높은 순서 대로 티켓 갯수만큼 -->
+      
+      <h2><strong>bid  당첨자 목록! 축하합니다! </strong></h2>
+      <% @winners = @concert.bids.order(cost: :desc).limit(@concert.ticketNumber)%>
+      <% @winners.each do |w| %>
+      <div class="well">
+        <p style="color:black">낙찰자 이메일 : <%= w.user.email %></p>
+        <p style="color:black"><%= w.user.name %>님 축하합니다!</p>
+        <p style="color:black">낙찰금액 : <%= w.cost %>원</p>
+      </div>
+      <% end %>
+  
+  <% end %>
+</body>
